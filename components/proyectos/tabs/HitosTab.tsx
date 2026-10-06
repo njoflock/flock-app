@@ -29,7 +29,7 @@ function calcEstadoEfectivo(hito: HitoLocal, hoy: Date): EstadoHito {
   if (hito.estado === "completado") return "completado";
   if (hito.estado === "en_curso" || hito.estado === "pendiente") {
     const fecha = new Date(hito.fecha + "T12:00:00");
-    if (fecha < hoy && hito.estado !== "completado") return "retrasado";
+    if (fecha < hoy) return "retrasado";
   }
   return hito.estado;
 }
@@ -557,7 +557,7 @@ function HitoModal({
   hito, onSave, onClose,
 }: {
   hito?: HitoLocal;
-  onSave: (h: HitoLocal | Omit<HitoLocal, "id">) => void;
+  onSave: (h: HitoLocal) => void;
   onClose: () => void;
 }) {
   const isNew = !hito;
@@ -569,7 +569,7 @@ function HitoModal({
   function handleSave() {
     if (!nombre.trim() || !fecha) return;
     if (isNew) {
-      onSave({ nombre, fecha, descripcion, estado, id: "" } as HitoLocal);
+      onSave({ nombre, fecha, descripcion, estado, id: `new-${Date.now()}` });
     } else {
       onSave({ ...hito!, nombre, fecha, descripcion, estado });
     }

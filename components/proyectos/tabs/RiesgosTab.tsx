@@ -468,7 +468,7 @@ function RiesgoModal({
   riesgo, onSave, onClose,
 }: {
   riesgo?: RiesgoLocal;
-  onSave: (r: RiesgoLocal | Omit<RiesgoLocal, "id" | "createdOrder">) => void;
+  onSave: (r: RiesgoLocal) => void;
   onClose: () => void;
 }) {
   const isNew = !riesgo;
@@ -481,7 +481,7 @@ function RiesgoModal({
   function handleSave() {
     if (!nombre.trim()) return;
     if (isNew) {
-      onSave({ riesgo: nombre, fecha, estado, impacto, mitigacion });
+      onSave({ riesgo: nombre, fecha, estado, impacto, mitigacion, id: `new-${Date.now()}`, createdOrder: Date.now() });
     } else {
       onSave({ ...riesgo!, riesgo: nombre, fecha, estado, impacto, mitigacion });
     }
