@@ -1,26 +1,126 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ─── Flock Design Tokens ─────────────────────────────────────────────────── */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Brand */
+  --color-flock-orange:      #FF5102;
+  --color-flock-violet:      #7F07C5;
+  --color-flock-purple:      #44016B;
+  --color-flock-purple-dark: #1C002C;
+  --color-flock-white:       #FFFFFF;
+
+  /* Semantic — Light (default) */
+  --color-bg-base:       var(--bg-base);
+  --color-bg-surface:    var(--bg-surface);
+  --color-bg-elevated:   var(--bg-elevated);
+  --color-bg-muted:      var(--bg-muted);
+
+  --color-text-primary:  var(--text-primary);
+  --color-text-secondary:var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-inverse:  var(--text-inverse);
+
+  --color-border:        var(--border);
+  --color-border-subtle: var(--border-subtle);
+
+  --color-brand:         #FF5102;
+  --color-brand-hover:   #e64800;
+
+  /* Radius */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-2xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadow */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --shadow-md:   0 4px 16px 0 rgb(0 0 0 / 0.08);
+  --shadow-lg:   0 8px 32px 0 rgb(0 0 0 / 0.10);
+
+  /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Light theme ─────────────────────────────────────────────────────────── */
+
+:root {
+  color-scheme: light;
+
+  --bg-base:      #F8F7FA;
+  --bg-surface:   #FFFFFF;
+  --bg-elevated:  #FFFFFF;
+  --bg-muted:     #F0EDF5;
+
+  --text-primary:   #1C002C;
+  --text-secondary: #6B5B7B;
+  --text-tertiary:  #9B8AAD;
+  --text-inverse:   #FFFFFF;
+
+  --border:        rgba(127, 7, 197, 0.12);
+  --border-subtle: rgba(127, 7, 197, 0.06);
+}
+
+/* ─── Dark theme ──────────────────────────────────────────────────────────── */
+
+.dark {
+  color-scheme: dark;
+
+  --bg-base:      #1C002C;
+  --bg-surface:   #270040;
+  --bg-elevated:  #320050;
+  --bg-muted:     #3D0060;
+
+  --text-primary:   #F5F0FF;
+  --text-secondary: #C4ADE0;
+  --text-tertiary:  #8B70B0;
+  --text-inverse:   #1C002C;
+
+  --border:        rgba(196, 173, 224, 0.12);
+  --border-subtle: rgba(196, 173, 224, 0.06);
+}
+
+/* ─── Base styles ─────────────────────────────────────────────────────────── */
+
+html {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ─── Gradient utilities ──────────────────────────────────────────────────── */
+
+.gradient-brand {
+  background: linear-gradient(135deg, #FF5102 0%, #7F07C5 100%);
+}
+
+.gradient-brand-text {
+  background: linear-gradient(135deg, #FF5102 0%, #7F07C5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Scrollbar (dark mode) ───────────────────────────────────────────────── */
+
+.dark ::-webkit-scrollbar {
+  width: 6px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--bg-muted);
+  border-radius: 3px;
 }
